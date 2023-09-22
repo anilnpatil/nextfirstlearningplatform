@@ -1,0 +1,26 @@
+<div class="container form-container shadow">
+    <p class="text-center header">Log in</p>
+    <p class="text-center">You do not have an account?
+        <a routerLink="/register">register!</a>
+    </p>
+    <app-error-bar [errorMessage]="errorMessage" *ngIf="error"></app-error-bar>
+    <app-info-bar [message]="'Registration successful, log in'" *ngIf="isRedirectFromRegistration"></app-info-bar>
+    <app-error-bar [errorMessage]="'To access the site, please log in.'" *ngIf="returnUrl"></app-error-bar>
+    <div class="login-form">
+        <form [formGroup]="loginForm" (ngSubmit)="Submit()">
+            <div class="form-group">
+                <label>Login or email</label>
+                <input type="text" placeholder="Your login or email address" formControlName="login" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.login.errors }"/>
+                <div class="text-danger" *ngIf="submitted && ctls.login.errors && ctls.login.errors.required">Enter your login</div>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="your password" formControlName="password" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.password.errors }"/>
+                <div class="text-danger" *ngIf="submitted && ctls.password.errors && ctls.password.errors.required">enter the password</div>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
+        </form>
+    </div>
+</div>

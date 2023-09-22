@@ -1,0 +1,6 @@
+.card-row {
+    margin-bottom: 4vh;
+}
+::ng-deep li.pagination-next > a:focus, ::ng-deep li.pagination-previous > a:focus {
+    outline: 0;
+}

@@ -1,0 +1,14 @@
+<app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>
+<app-success-bar *ngIf="deleteSucces" [message]="'The task was successfully deleted.'"></app-success-bar>
+<app-task *ngIf="task && course"
+    [task]="task"
+    [course]="course"
+    [standalone]="true"
+    [showManagement]="ShowManagement"
+    [showForStudent]="ShowForStudent"
+    [taskSchedule]="taskSchedule"
+    (delete)="OnTaskDelete()"
+    (update)="OnTaskEdit()"
+    (markToRepeat)="OnTaskToRepeat($event)"
+    (updateProgress)="OnTaskProgressUpdate($event)"
+></app-task>

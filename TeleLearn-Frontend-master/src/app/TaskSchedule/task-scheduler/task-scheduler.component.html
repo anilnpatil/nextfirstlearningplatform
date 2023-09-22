@@ -1,0 +1,98 @@
+<app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>
+<div class="main" *ngIf="Display">
+    <div class="d-flex task-schedule-header">
+        <button (click)="OnPrevScheduleDay()" class="btn btn-primary d-flex align-items-center justify-content-center" title="The previous day" [disabled]="IsScheduleFirstPage()">
+            <i class="material-icons">
+                keyboard_arrow_left
+            </i>
+        </button>
+        <div class="flex-grow-1 text-center bold header-title">Plan for: {{ CurrentScheduleDate }} </div>
+        <button (click)="OnNextScheduleDay()" class="btn btn-primary d-flex align-items-center justify-content-center" title="the next day">
+            <i class="material-icons">
+                keyboard_arrow_right
+            </i>
+        </button>
+    </div>
+    <div class="d-flex align-items-center time-for-day" [ngClass]="{'time-overflow': IsTimeOverflow()}">
+        <div class="flex-grow-1" *ngIf="!timeEdit">
+            Planned study time per day:  <span class="bold" [ngClass]="{'text-danger': IsTimeOverflow()}">{{ TotalScheduledTime.hours }}:{{ TotalScheduledTime.minutes | number:'2.0-0' }}</span>&nbsp;/&nbsp;<span class="bold">{{ TodaysLearningTime.hours }}:{{ TodaysLearningTime.minutes | number:'2.0-0' }}</span>
+        </div>
+        <button *ngIf="!timeEdit" (click)="timeEdit=true" class="btn btn-success d-flex align-self-center align-items-center justify-content-center" title="Change your study time">
+            <i class="material-icons">
+                edit
+            </i>
+        </button>
+        <div *ngIf="timeEdit" class="align-self-center">
+            <app-time-input-form
+            [time]="TodaysLearningTime"
+            [labelText]="'A new time of learning:'"
+            (cancel)="timeEdit=false"
+            (apply)="OnTimeUpdate($event)"
+            ></app-time-input-form>
+        </div>
+    </div>
+    <div class="task-card-container">
+        <div class="item-container" *ngFor="let item of TodaysSchedule">
+            <app-scheduled-task-card [taskSchedule]="item" 
+            [buttons]="['remove', 'edit']"
+            (edit)="OpenModalEditSchedule(scheduleDialog, item)"
+            (remove)="OnScheduleDelete(item)"
+            ></app-scheduled-task-card>
+        </div>
+    </div>
+    <div class="d-flex task-schedule-header">
+        <button (click)="OnPrevTaskToSchedule()" class="btn btn-primary d-flex align-items-center justify-content-center" title="The previous day" [disabled]="IsTaskToScheduleForstPage()">
+            <i class="material-icons">
+                keyboard_arrow_left
+            </i>
+        </button>
+        <div class="flex-grow-1 text-center bold header-title">Tasks on: {{ CurrentTaskToScheduleSection }} </div>
+        <button (click)="OnNextTaskToSchedule()" class="btn btn-primary d-flex align-items-center justify-content-center" title="the next day">
+            <i class="material-icons">
+                keyboard_arrow_right
+            </i>
+        </button>
+    </div>
+    <div class="task-card-container">
+        <div class="item-container" *ngFor="let item of CurrentTaskToSchedule">
+            <app-task-to-schedule-card
+             [taskToSchedule]="item"
+             [showDate]="ShowDate()" 
+             (schedule)="OpenModalSchedule(scheduleDialog, item)
+             "></app-task-to-schedule-card>
+        </div>
+    </div>
+</div>
+
+<ng-template #scheduleDialog let-c="close" let-d="dismiss">
+    <form [formGroup]="dialogForm" (submit)="c('Save click'); OnSubmit()">
+        <div class="modal-header">
+            <span  class="modal-title h5" id="modal-basic-title">{{ DialogTitle }}</span>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Study start time: </label>
+                <div class="separator"></div>
+                <input type="time" class="form-control" formControlName="startTime" [ngClass]="{invalid: ctls.startTime.errors}"/>
+            </div>
+            <div class="form-group">
+                <label>Study time: </label>
+                <div class="separator"></div>
+                <div class="d-flex align-items-center">
+                    <input type="number" [min]="0" class="form-control" formControlName="hours" [ngClass]="{invalid: ctls.hours.errors}"/>
+                    <div class="separator align-self-center">:</div>
+                    <input type="number" [min]="0" [max]="59" class="form-control" formControlName="minutes" [ngClass]="{invalid: ctls.minutes.errors}"/>
+                </div>
+                <div *ngIf="ctls.hours.errors" class="text-danger">
+                    <div *ngIf="ctls.hours.errors.required">Enter the number of hours</div>
+                    <div *ngIf="ctls.hours.errors.min">Incorrect number of hours</div>
+                    <div *ngIf="ctls.hours.errors.max">You cannot plan for more than 1 day</div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="c('Cross click')">Cancel</button>
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </form>
+  </ng-template>

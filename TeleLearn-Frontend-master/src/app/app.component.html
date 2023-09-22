@@ -1,0 +1,23 @@
+<body>
+    <ngx-loading-bar ref="http" [includeSpinner]="false" [height]="'5px'" [color]="'rgb(0, 207, 138)'"></ngx-loading-bar>
+    <nav class="navbar navbar-default fixed-top shadow acrylic">
+        <div class="nav-menu vertical-center">
+            <div class="nav-menu-elements d-flex bd-highlight">
+                <div class="flex-grow-1 bd-highlight app-name align-self-center">
+                    <a class="navbar-brand" href="/">{{ appName }}</a>
+                </div>
+                <span *ngIf="innerWidth > breakPont && !currentUser" class="bd-highlight align-self-center">Not logged in(<a routerLink="/login">log in</a>)</span>
+                <span *ngIf="innerWidth <= breakPont && !currentUser" class="bd-highlight align-self-center"><a routerLink="/login">log in</a></span>
+                <span *ngIf="innerWidth > breakPont && currentUser" class="bd-highlight align-self-center">logged in as {{currentUser.name}} {{currentUser.surname}} (<a routerLink="/logout">log out</a>)</span>    
+                <span *ngIf="innerWidth <= breakPont && currentUser" class="bd-highlight align-self-center"><a routerLink="/logout">log out</a></span>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <app-banner></app-banner>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+    <footer>NextFirst Since 2004</footer>
+</body>

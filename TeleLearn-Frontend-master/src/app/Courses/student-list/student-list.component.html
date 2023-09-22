@@ -1,0 +1,56 @@
+<app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>
+<div *ngIf="course && IsCurrentUserTeacher() && course.requestedStudents.length > 0">
+    <div class="h4 text-center">List of students waiting for acceptance:</div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Last name</th>
+            <th >Unit</th>
+            <th>Share</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of course.requestedStudents">
+                <td><a routerLink="/user/{{ item.id }}">{{ item.name }}</a></td>
+                <td><a routerLink="/user/{{ item.id }}">{{ item.surname }}</a></td>
+                <td>{{ item.unit }}</td>
+                <td>
+                    <button title="Accept" class="btn btn-outline-success" (click)="OnStudentAccept(item)">
+                        <i class="material-icons">person_add</i>
+                    </button>
+                    <button title="Reject" class="btn btn-outline-danger" (click)="OnUserDelete(item)">
+                        <i class="material-icons">person_remove</i>
+                    </button>
+                </td>
+              </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="course">
+    <div class="h4 text-center">List of course participants:</div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Last name</th>
+            <th >Single</th>
+            <th *ngIf="IsCurrentUserTeacher()">Share</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of course.allowedStudents">
+                <td><a routerLink="/user/{{ item.id }}">{{ item.name }}</a></td>
+                <td><a routerLink="/user/{{ item.id }}">{{ item.surname }}</a></td>
+                <td>{{ item.unit }}</td>
+                <td *ngIf="IsCurrentUserTeacher()">
+                    <button title="Remove a student from a course" class="btn btn-outline-danger" (click)="OnUserDelete(item)">
+                        <i class="material-icons">person_remove</i>
+                    </button>
+                </td>
+              </tr>
+        </tbody>
+    </table>
+</div>
+

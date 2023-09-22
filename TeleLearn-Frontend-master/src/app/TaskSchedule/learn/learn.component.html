@@ -1,0 +1,7 @@
+<app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>
+<header class="h4 text-center">Choose the plan from today that you want to implement:</header>
+<div class="container center" *ngFor="let item of schedule">
+    <div class="wrapper">
+        <app-scheduled-task-card [taskSchedule]="item" [buttons]="['learn']" (learn)="OnTaskLearn(item)"></app-scheduled-task-card>
+    </div>
+</div>

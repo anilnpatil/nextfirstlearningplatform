@@ -1,0 +1,25 @@
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+/*bootstrap override */
+.page-link {
+    border-radius: 0;
+}
+
+.pagination {
+    border: none;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.btn:hover {
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,.15);
+}
+
+.nav-container {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px lightgray;
+}

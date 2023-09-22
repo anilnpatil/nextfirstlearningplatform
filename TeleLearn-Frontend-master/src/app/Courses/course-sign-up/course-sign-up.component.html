@@ -1,0 +1,11 @@
+<app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>
+<app-info-bar *ngIf="waitMessage" [message]="'Your request to join has been sent to the course instructor.'"></app-info-bar>
+<div class="container" *ngIf="course">
+    <h3 class="text-center">Signing up for a course: {{ course.name }}</h3>
+    <p>Course leader: <a routerLink="/user/{{ course.owner.id }}"> {{ course.owner.title }} {{ course.owner.name }} {{ course.owner.surname }}</a></p>
+    <p>To gain access to the course, you must first sign up for it.</p>
+    <p *ngIf="!course.isAutoAccept">Once you have signed up for a course, the instructor must accept your request to join, after which you will be able to access the course.</p>
+    <div class="form-group d-flex justify-content-center sub-btn">
+        <button class="btn btn-primary" (click)="OnStudenSignIn()">Sign up for the course</button>
+    </div>
+</div>

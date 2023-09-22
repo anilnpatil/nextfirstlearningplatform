@@ -1,0 +1,49 @@
+<form [formGroup]="form" (submit)="OnSubmit()">
+    <div class="form-group">
+        <div class="d-flex align-items-center">
+            <label>Study start time: </label>
+            <div class="separator"></div>
+            <input type="time" class="form-control time-input" formControlName="startTime" [ngClass]="{invalid: ctls.startTime.errors}"/>
+        </div>
+        <div *ngIf="ctls.startTime.errors" class="text-danger">
+            <div *ngIf="ctls.startTime.errors.required">Enter your learning start time</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="d-flex align-items-center">
+            <label>Study time: </label>
+            <div class="separator"></div>
+            <input type="number" [min]="0" class="form-control" formControlName="hours" [ngClass]="{invalid: ctls.hours.errors}"/>
+            <div class="separator align-self-center">:</div>
+            <input type="number" [min]="0" [max]="59" class="form-control" formControlName="minutes" [ngClass]="{invalid: ctls.minutes.errors}"/>
+        </div>
+        <div *ngIf="ctls.hours.errors" class="text-danger">
+            <div *ngIf="ctls.hours.errors.required">Enter the number of hours</div>
+            <div *ngIf="ctls.hours.errors.min">Incorrect number of hours</div>
+            <div *ngIf="ctls.hours.errors.max">You cannot plan for more than 1 day</div>
+        </div>
+        <div *ngIf="ctls.minutes.errors" class="text-danger">
+            <div *ngIf="ctls.minutes.errors.required">Enter the number of minutes</div>
+            <div *ngIf="ctls.minutes.errors.min || form.controls.minutes.errors.max">Incorrect number of minutes</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="d-flex align-items-center">
+            <label class="align-self-center">New quest progress:</label>
+            <div class="separator"></div>
+            <input type="number" [min]=0 [max]=100 class="form-control" formControlName="progress" [ngClass]="{invalid: ctls.progress.errors}"/>
+            <div class="align-self-center">%</div>
+        </div>
+        <div *ngIf="ctls.progress.errors" class="text-danger">
+            <div *ngIf="ctls.progress.errors.required">Provide the progress of the task</div>
+            <div *ngIf="ctls.progress.errors.max || ctls.progress.errors.min">Invalid progress value</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="d-flex align-items-center justify-content-center">
+            <button type="submit" class="btn btn-success">Save</button>
+            <div class="separator"></div>
+            <button class="btn btn-danger" (click)="cancel.emit()" type="button">Cancel</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,64 @@
+.card {
+    padding: 5px 10px;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+}
+
+.item {
+    border: solid 1px darkgray;
+}
+
+.header {
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+i {
+    font-size: 48px;
+}
+
+.btn > i {
+    font-size: 32px;
+}
+
+.item:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+a.card-link {
+    color: black;
+}
+
+a.card-link:hover{
+    text-decoration: underline;
+    color: darkblue;
+}
+
+ .btn {
+     padding: 0;
+ }
+
+ .bold {
+     font-weight: bold;
+ }
+
+ .separator {
+     margin: 0 .25em;
+ }
+
+ .completed {
+     background-color: rgb(225, 252, 225);
+ }
+
+ .completed:hover {
+    background-color: rgb(194, 255, 194);
+}
+
+ .overlap {
+     background-color: rgb(255, 221, 221);
+ }
+
+ .overlap:hover {
+    background-color: rgb(255, 203, 203);
+}

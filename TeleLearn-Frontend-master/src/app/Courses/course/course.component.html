@@ -1,0 +1,59 @@
+<app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>
+<h2 *ngIf="course">{{ course.name }}</h2>
+<div class="header d-flex">
+    <div>
+        <a a class="d-flex justify-content-center"class="d-flex align-items-center back" routerLink="/my-courses">
+            <i class="material-icons">keyboard_backspace</i>
+            Back to my courses</a>
+    </div>
+    <div class="flex-grow-1"></div>
+</div>
+<div class="d-flex bd-highlight flex-wrap" *ngIf="!error">
+    <div class="menu bd-highlight shadow" *ngIf="course">
+        <div class="menu-title d-flex align-items-center justify-content-center" [ngStyle]="{'margin-bottom': (innerWidth < breakPoint && !menuVisible) ? '0' : '10px'}" (click)="menuVisible = !menuVisible">Course navigation
+            <i *ngIf="innerWidth < breakPoint" class="material-icons">keyboard_arrow_down</i></div>
+       <div *ngIf="innerWidth > breakPoint || menuVisible">
+            <header class="nav-banner">
+                Course sections
+            </header>
+            <ul>
+                <li>
+                    <a a class="d-flex justify-content-center"routerLink="/course/{{ course.id }}" (click)="menuVisible = false">Information</a>
+                </li>
+                <li>
+                    <a a class="d-flex justify-content-center"routerLink="/course/{{ course.id }}/calendar" (click)="menuVisible = false">Calendar</a>
+                </li>
+                <li>
+                    <a a class="d-flex justify-content-center"routerLink="/course/{{ course.id }}/board" (click)="menuVisible = false">Post board</a>
+                </li>
+                <li style="border-bottom: none;">
+                    <a a class="d-flex justify-content-center"routerLink="/course/{{ course.id }}/paths" (click)="menuVisible = false">Paths</a>
+                </li>
+            </ul>
+
+            <header class="nav-banner">
+                Course management
+            </header>
+
+            <ul *ngIf="IsCurrentUserStudent()">
+                <li>
+                    <a a class="d-flex justify-content-center"routerLink="/course/{{ course.id }}/participants" (click)="menuVisible = false">The list of participants</a>
+                </li>
+                <li>
+                    <a a class="d-flex justify-content-center"routerLink="/course/{{ course.id }}/sign-out" (click)="menuVisible = false">Unsubscribe from the course</a>
+                </li>
+            </ul>
+            <ul *ngIf="IsCurrentUserTeacher()">
+                <li>
+                    <a a class="d-flex justify-content-center"routerLink="/course/{{ course.id }}/participants" (click)="menuVisible = false">The list of participants</a>
+                </li>
+                <li>
+                    <a a class="d-flex justify-content-center"routerLink="/course/{{ course.id }}/update" (click)="menuVisible = false">Course settings</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-container flex-grow-1 justify-content-center">
+        <router-outlet></router-outlet>
+    </div>
+</div>

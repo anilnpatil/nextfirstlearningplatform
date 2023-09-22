@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: springuser
+    password: springsecret
+    initialization-mode: always
+    data: classpath:/testData.sql
+  jpa:
+    show-sql: false
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
+      ddl-auto: none
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+kielce:
+  tu:
+    weaii:
+      telelearn:
+        security:
+          secret: '{bcrypt}na65fTBcDUJkJgtAgiVdglFrm9sgE8IcMCUmKdOy'
+          jwtExpirationMs: 604800000

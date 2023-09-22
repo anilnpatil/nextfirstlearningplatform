@@ -1,0 +1,51 @@
+<div class="h4 text-center">Course paths</div>
+<app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>
+<div *ngIf="course && IsCurrentUserTeacher()" class="add-task d-flex justify-content-center">
+    <a class="btn btn-primary d-flex align-items-center" routerLink="/course/{{ course.id }}/task/add">
+        <i class="material-icons">add_task</i>
+        <div class="separator"></div>
+        Add a task
+    </a>
+    <div class="separator"></div>
+    <a class="btn btn-secondary d-flex align-items-center" routerLink="/course/{{ course.id }}/composer">
+        <i class="material-icons">add_task</i>
+        <div class="separator"></div>
+        Open the editor
+    </a>
+</div>
+<div class="graph-container shadow-sm" *ngIf="course && tasks">
+        <ngx-graph class="chart-container" 
+        [update$] = "update$"
+        [draggingEnabled]="false"
+        [enableZoom]="false"
+        [autoCenter]="innerWidth > breakPoint"
+        [links]="links"
+        [nodes]="nodes"
+        layout="dagreCluster">
+        <ng-template #nodeTemplate let-node>
+            <svg:g class="node">
+                <a class="task" [attr.href]="GetTaskPath(node.id)">
+                        <svg:rect
+                        [attr.width]="node.dimension.width"
+                        [attr.height]="node.dimension.height"
+                        [attr.fill] = "GetTaskColor(node.task)"
+                        rx="10" ry="10" class="task-rect"
+                    />
+                    <svg:text alignment-baseline="central" y=".5em">
+                        <tspan text-anchor="middle" [attr.font-weight]="'bold'" [attr.x]="node.dimension.width / 2" dy=".6em">{{node.label}}</tspan>
+                        <tspan text-anchor="middle" [attr.x]="node.dimension.width / 2" dy="1.2em">{{node.task.dueDate | date:('dd.MM.yyyy')}}{{ (IsTaskValid(node.task)) ? '' : '!' }}</tspan>
+                        <tspan text-anchor="middle" [attr.x]="node.dimension.width / 2" dy="1.2em" *ngIf="IsCurrentUserStudent()">{{ GetTaskForStudent(node.task).taskCompletion }}%</tspan>
+                    </svg:text>
+                </a>
+            </svg:g>
+        </ng-template>
+        <ng-template #linkTemplate let-link>
+            <svg:g class="edge">
+                <svg:path class="line" [attr.stroke]="(link.source == 1 && link.target == 'second') ? 'red' : 'black'" stroke-width="2" marker-end="url(#arrow)"></svg:path>
+            </svg:g>
+            <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="8" markerHeight="8" orient="auto">
+                <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+            </svg:marker>
+        </ng-template>
+    </ngx-graph>
+</div>

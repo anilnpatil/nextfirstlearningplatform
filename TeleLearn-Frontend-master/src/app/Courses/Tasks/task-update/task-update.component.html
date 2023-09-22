@@ -1,0 +1,7 @@
+<app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>
+<app-task-composer *ngIf="task && course"
+    [task]="task"
+    [course]="course"
+    (save)="OnSave()"
+    [standalone]="true"
+></app-task-composer>

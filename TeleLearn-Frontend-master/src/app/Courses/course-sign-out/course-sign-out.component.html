@@ -1,0 +1,5 @@
+<app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>
+<p class="text-danger text-center">Are you sure you want to unsubscribe from the course? The operation is irreversible and you will lose your progress!</p>
+<div class="form-group d-flex justify-content-center sub-btn">
+    <button class="btn btn-danger" (click)="OnSignOut()">Sign me out</button>
+</div>

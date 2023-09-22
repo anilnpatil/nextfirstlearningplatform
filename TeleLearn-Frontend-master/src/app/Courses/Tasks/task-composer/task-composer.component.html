@@ -1,0 +1,98 @@
+<app-error-bar *ngIf="error && standalone" [errorMessage]="errorMessage"></app-error-bar>
+<div class="container">
+    <p class="h3 text-center" *ngIf="!task">Adding a task</p>
+    <p class="h3 text-center" *ngIf="task">Edit a task {{ task.name }}</p>
+    <form [formGroup]="taskForm" (ngSubmit)="Submit()">
+        <div class="form-group">
+            <label>Task name (*):</label>
+            <input type="text" placeholder="Task name" formControlName="name" class="form-control"
+                [ngClass]="{ 'invalid': submitted && ctls.name.errors }"/>
+            <div class="text-danger" *ngIf="submitted && ctls.name.errors && ctls.name.errors.required">The task must have a name</div>
+        </div>
+        <div class="form-group">
+            <label>Task description:</label>
+            <textarea placeholder="Task description..." formControlName="content" class="form-control" rows=7></textarea>
+        </div>
+        <div class="form-group">
+            <label>Execution time (HH:mm) (*):</label>
+            <div class="d-flex align-content-center">
+                <input type="number" formControlName="hoursInterval" [min]=0 class="form-control" [ngClass]="{ 'invalid': submitted && ctls.hoursInterval.errors }"/>
+                <div class="interval-separator align-self-center">
+                    :
+                </div>
+                <input type="number" formControlName="minutesInterval" [min]=0 max="60" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.minutesInterval.errors }"/>
+            </div>
+            <div *ngIf="submitted && ctls.minutesInterval.errors" class="text-danger">
+                <div *ngIf="ctls.minutesInterval.errors.min">The number of minutes cannot be negative</div>
+                <div *ngIf="ctls.minutesInterval.errors.max">The number of minutes cannot exceed 60</div>
+            </div>
+            <div *ngIf="submitted && ctls.hoursInterval.errors" class="text-danger">
+                <div *ngIf="ctls.hoursInterval.errors.min">The number of minutes cannot be negative</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>end date(*):</label>
+            <input type="date"  formControlName="dueDate" class="form-control"
+                [ngClass]="{ 'invalid': submitted && ctls.dueDate.errors }"/>
+            <div class="text-danger" *ngIf="submitted && ctls.dueDate.errors && ctls.dueDate.errors.required">The task must have an end date</div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="h5">Previous tasks:</label>
+            <div class="d-flex align-items-center" *ngIf="standalone">
+                <select formControlName="previousTask" class="form-control">
+                    <option *ngFor="let item of taskToDisplay" [ngValue]="item">{{ item.name }}</option>
+                </select>
+                <div class="separator"></div>
+                <button type="button" class="btn btn-primary" (click)="OnPreviousTaskAdd()">Add a task</button>
+            </div>
+            <div *ngIf="!standalone">
+                <button *ngIf="!taskSelectionMode" type="button" class="btn btn-secondary" (click)="OnSelectTaskClick()">Add a task</button>
+                <button *ngIf="taskSelectionMode" type="button" class="btn btn-primary" (click)="OnSelectTaskClick()">Select a task from the graph or click to cancel</button>
+            </div>
+            <div class="list">
+                <div class="d-flex align-items-center item-on-list" *ngFor="let item of previousTasks">
+                    <button type="button" class="btn btn-danger d-flex align-items-center" title="Remove a task from the list" (click)="OnPreviousTaskDelete(item)">
+                        <i class=" material-icons">close</i></button>
+                    <div class="separator"></div>
+                    {{ item.name }}
+                    (<span [ngClass]="CheckPrevTaskDate(item) ? 'prev-task-ok-date' : 'prev-task-bad-date'"> 
+                        {{ item.dueDate | date:('dd.MM.yyyy') }} 
+                    </span>)
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            <p class="h5">Attachments:</p>
+            <div class="form-group">
+                <label for="attachment-upload">add file (max {{ MAX_FILE_SIZE_MB }}MB):</label>
+                <input #attachmentUpload type="file" class="form-control-file" id="attachment-upload" (change)="onFileSelect($event)"/>
+            </div>
+            <div *ngIf="filesToUpload.length > 0">
+                <p class="h5">Attachments to upload:</p>
+                <div class="d-flex align-items-center item-on-list" *ngFor="let item of filesToUpload">
+                    <button type="button" class="btn btn-danger" title="Delete attachment" (click)="OnFileToUploadDelete(item)"><i class="material-icons">delete_forever</i></button>
+                    <div class="separator"></div>
+                    <i class="material-icons">text_snippet</i>
+                    {{ item.name }}
+                </div>
+            </div>
+            <div *ngIf="task && task.attachments.length > 0">
+                <p class="h5">Attachments added to the task:</p>
+                <div class="d-flex align-items-center attachment item-on-list" *ngFor="let item of task.attachments">
+                    <button type="button" class="btn btn-danger" title="Delete attachment" (click)="OnAddedFileDelete(item)"><i class="material-icons">delete_forever</i></button>
+                    <div class="separator"></div>
+                    <i class="material-icons">text_snippet</i>
+                    {{ item.fileName }}
+                </div>
+            </div>
+        </div>
+        <app-error-bar *ngIf="error && !standalone" [errorMessage]="errorMessage"></app-error-bar>
+        <div class="form-group d-flex justify-content-center">
+            <button type="submit" class="btn sub-btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>

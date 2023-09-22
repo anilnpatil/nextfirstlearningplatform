@@ -1,0 +1,39 @@
+<div class="justify-content-center">
+    <h2 class="text-center">Conversations</h2>
+</div>
+<div *ngIf="!error">
+    <div class="conversation container-fluid shadow-sm justify-content-center" *ngFor="let item of collection | paginate: { itemsPerPage: perPage, currentPage: current }">
+        <a routerLink="/messages/{{ item.participant.id }}">
+            <div class="d-flex align-items-center justify-content-end">
+                <i *ngIf="item.unreadMessageCount > 0" class="material-icons">
+                    mark_chat_unread
+                </i>
+                <i *ngIf="item.unreadMessageCount === 0" class="material-icons">
+                    chat_bubble_outline
+                </i>
+                <div class="card">
+                    <div class="card-row header">
+                        {{ item.participant.name }}
+                        {{ item.participant.surname }}
+                        <span *ngIf="item.unreadMessageCount > 0">
+                            (<span class="new-messages">{{ item.unreadMessageCount }}</span>)
+                        </span>
+                    </div>
+                    <div class="card-row">
+                        <span class="date">
+                            last message:
+                            {{ item.lastMessageTime | date:'dd.MM.yyyy HH:mm'}}
+                        </span>
+                    </div>
+                </div>
+                <i class="material-icons">
+                    keyboard_arrow_right
+                </i>
+            </div>
+        </a>
+    </div>
+    <div class="row justify-content-center">
+        <pagination-controls nextLabel="next" previousLabel="previous" (pageChange)="current = $event"></pagination-controls>
+    </div>
+</div>
+<app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>

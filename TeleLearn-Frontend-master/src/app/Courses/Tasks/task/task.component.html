@@ -1,0 +1,92 @@
+<div [ngClass]="standalone ? 'card-standalone' : 'card'" *ngIf="task && (!standalone || course)">
+    <div class="card-row d-flex justify-content-end btn-menu" *ngIf="showManagement">
+        <button class="btn btn-success d-flex align-items-center"  (click)="update.emit()">
+            <i class="material-icons md-18">create</i>Edit task
+        </button>
+        <div class="separator"></div>
+        <button class="btn btn-danger d-flex align-items-center" (click)="delete.emit()">
+            <i class="material-icons md-18">delete_forever</i>Delete the task
+        </button>
+    </div>
+    <div class="card-row d-flex justify-content-end btn-menu" *ngIf="showForStudent && standalone && taskForStudent.isLearnable">
+        <button class="btn btn-success d-flex align-items-center"  (click)="OnProgressClick()">
+            <i class="material-icons md-18">create</i>Update progress
+        </button>
+        <div class="separator"></div>
+        <button *ngIf="!taskForStudent.isToRepeat && taskForStudent.taskCompletion == 100 && standalone" class="btn btn-warning d-flex align-items-center" (click)="markToRepeat.emit(true)">
+            <i class="material-icons md-18">notification_important</i>Set to replay
+        </button>
+        <button *ngIf="taskForStudent.isToRepeat && standalone" class="btn btn-danger d-flex align-items-center" (click)="markToRepeat.emit(false)">
+            <i class="material-icons md-18">notification_important</i>Remove from tasks for revision
+        </button>
+    </div>
+    <div class="card-row" *ngIf="showProgressUpdate && standalone">
+        <form [formGroup]="progressForm" class="d-flex align-content-center form-group" (submit)="OnProgressApply()">
+            <label class="align-self-center">Task progress:</label>
+            <div class="separator"></div>
+            <input type="number" formControlName="progress" [min]=0 [max]=100 class="form-control" [ngClass]="{ 'invalid': progressForm.controls.progress.errors }"/>
+            <div class="align-self-center">%</div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <button type="submit" class="btn btn-success d-flex align-items-center">
+                <i class="material-icons md-18">done</i>
+            </button>
+            <div class="separator"></div>
+            <button type="button" (click)="showProgressUpdate = false" class="btn btn-danger d-flex align-items-center">
+                <i class="material-icons md-18">cancel</i>
+            </button>
+        </form>
+    </div>
+    <div class="card-title">
+        {{ task.name }}
+    </div>
+    <div class="card-subtitle" *ngIf="standalone">
+        A task that needs to be done <a routerLink="/course/{{ course.id }}">{{ course.name }}</a>
+    </div>
+    <div class="card-row">
+        Task completion date: <span class="bold-span">{{ task.dueDate | date:('dd.MM.yyyy') }}</span>
+    </div>
+    <div class="card-row">
+        Proposed task completion time: <span class="bold-span">{{ task.learningTime.hours }}:{{ task.learningTime.minutes | number:'2.0-0' }}</span>
+    </div>
+    <div class="card-row" *ngIf="taskForStudent">
+        Task progress <span class="bold-span">{{ taskForStudent.taskCompletion }}%</span>
+    </div>
+    <div class="card-row text-danger" *ngIf="taskForStudent && taskForStudent.isToRepeat">
+        <span class="bold-span">Task to be repeated!</span>
+    </div>
+    <div class="card-row" *ngIf="task.description">
+        <span class="bold-span">The content of the task:</span>
+    </div>
+    <article class="card-text" [innerHTML]="task.description" *ngIf="task.description && task.description != 'null'"></article>
+    <div class="card-row" *ngIf="task.attachments && task.attachments.length > 0">
+        <span class="h5">Attachments:</span>
+        <ul>
+            <li *ngFor="let item of task.attachments">
+                <a class="link" (click)="DownloadFile(item)">{{ item.fileName }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-row" *ngIf="taskSchedule && taskSchedule.length > 0 && standalone">
+        <span class="h5">Task scheduling records:</span>
+        <div class="schedule-card" *ngFor="let item of taskSchedule">
+            <app-scheduled-task-card 
+            [taskSchedule]="item"
+            [onTaskPage]="true"></app-scheduled-task-card>
+         </div>
+    </div>
+    <div *ngIf="standalone && (task.nextTasks.length > 0 || task.previousTasks.length > 0)" class="task-nav">
+        <span class="h5">Task binding:</span>
+        <a routerLink="/course/{{ course.id }}/task/{{ item.id }}" class="d-flex align-items-center task-link" 
+        *ngFor="let item of task.previousTasks">
+            <i class="material-icons">keyboard_arrow_left</i>
+            {{ item.name }}
+        </a>
+
+        <a routerLink="/course/{{ course.id }}/task/{{ item.id }}" class="d-flex align-items-center task-link justify-content-end" 
+        *ngFor="let item of task.nextTasks">
+            {{ item.name }}
+            <i class="material-icons">keyboard_arrow_right</i>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<app-error-bar [errorMessage]="errorMessage" *ngIf="error"></app-error-bar>
+<div class="login-form">
+    <form [formGroup]="registerationForm" (ngSubmit)="Submit()">
+        <div class="form-group">
+            <label>Login(*)</label>
+            <input type="text" placeholder="Your login" formControlName="login" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.login.errors }"/>
+            <div class="text-danger" *ngIf="submitted && ctls.login.errors && ctls.login.errors.required">Enter your login</div>
+        </div>
+        <div class="form-group">
+            <label>Password(*)</label>
+            <input type="password" placeholder="your password" formControlName="password" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.password.errors }"/>
+            <div *ngIf="submitted && ctls.password.errors" class="text-danger">
+                <div *ngIf="ctls.password.errors.required">Password is required</div>
+                <div *ngIf="ctls.password.errors.minlength">The password must have at least {{ PASSWORD_MIN_LENGHT }} characters</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Name(*)</label>
+            <input type="text" placeholder="Your name" formControlName="name" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.name.errors }"/>
+            <div class="text-danger" *ngIf="submitted && ctls.name.errors && ctls.name.errors.required">Give your name</div>
+        </div>
+        <div class="form-group">
+            <label>Last name(*)</label>
+            <input type="text" placeholder="your last name" formControlName="surname" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.surname.errors }"/>
+            <div class="text-danger" *ngIf="submitted && ctls.surname.errors && ctls.surname.errors.required">Please provide your name</div>
+        </div>
+        <div class="form-group">
+            <label>E-mail(*)</label>
+            <input type="text" placeholder="your e-mail" formControlName="email" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.email.errors }" />
+            <div *ngIf="submitted && ctls.email.errors" class="text-danger">
+                <div *ngIf="ctls.email.errors.required">Give me your e-mail</div>
+                <div *ngIf="ctls.email.errors.email">Email must be correct</div>      
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Academic title</label>
+            <input type="text" placeholder="Your academic title" formControlName="title" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Teaching unit</label>
+            <input type="text" placeholder="Name of the school/university where you teach" formControlName="unit" class="form-control"/>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" formControlName="tos" id="tos">
+            <label class="form-check-label" for="tos">I accept the website regulations</label>
+            <div class="text-danger" *ngIf="submitted && !ctls.tos.value">You must accept the website regulations</div>
+        </div>
+        <div class="form-group d-flex justify-content-center sub-btn">
+            <button type="submit" class="btn btn-primary">register</button>
+        </div>
+    </form>
+</div>

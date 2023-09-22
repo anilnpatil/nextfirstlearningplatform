@@ -1,0 +1,95 @@
+.menu {
+    border: solid rgb(230, 230, 230) 1px;
+    padding: 10px 0;
+    width: 20%;
+}
+
+.menu-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16pt;
+}
+
+.content-container {
+    width: 80%;
+    padding: 10px;
+    overflow: hidden;
+}
+
+a.back {
+    color: black;
+    text-decoration: none;
+}
+
+i {
+    font-size: 30px;
+}
+
+.header {
+    margin-bottom: 1em;
+    margin-left: 1em;
+
+}
+
+.nav-banner {
+    width: 100%;
+    font-size: 13pt;
+    padding: 7px 0;
+    text-align: center!important;
+    border: solid lightgray;
+    border-width: 1px 0;
+    font-weight: bold;
+    text-align: left;
+    background: radial-gradient(circle, rgba(194,233,248,1) 0%, rgba(216,241,251,1) 46%, rgba(224,238,244,1) 90%, rgba(255,255,255,1) 100%);
+    background-color: rgb(194, 233, 248); 
+}
+
+.nav-banner:focus {
+    outline: 0;
+}
+
+h2 {
+    margin-bottom: 25px;
+    padding-bottom: 5px;
+    padding-left: .5em;
+    border-bottom: solid darkgrey 1px;
+    word-break: break-all;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
+    text-align: center;
+    border-bottom: solid lightgray 1px;
+}
+
+a {
+    padding: 10px 0;
+    text-decoration: none;
+}
+
+
+li:hover {
+    background-color: aliceblue;
+}
+
+@media only screen and (max-width: 1000px) {
+    .menu {
+        margin-bottom: 1em;
+        width: 100%;
+    }
+
+    .menu-title {
+        cursor: pointer;
+    }
+
+    .content-container {
+        padding: 0;
+        width: 100%;
+    }
+}

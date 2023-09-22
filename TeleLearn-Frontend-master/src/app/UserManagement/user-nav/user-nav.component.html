@@ -1,0 +1,73 @@
+<header class="nav-banner" *ngIf="isCurrentUserAdmin">
+    Admin panel
+</header>
+<ul *ngIf="isCurrentUserAdmin">
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/news/compose" (click)="linkClick.emit()">Add a new article to the home page</a>
+    </li>
+</ul>
+
+<header class="nav-banner" *ngIf="isCurrentUserStudent">
+    Student panel
+</header>
+<ul *ngIf="isCurrentUserStudent">
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/my-courses" (click)="linkClick.emit()">My courses</a>
+    </li>
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/learn" (click)="linkClick.emit()">learn</a>
+    </li>
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/my-schedule" (click)="linkClick.emit()">Plan your learning</a>
+    </li>
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/timer" (click)="linkClick.emit()">Timepiece</a>
+    </li>
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/stats" (click)="linkClick.emit()">Summaries and statistics</a>
+    </li>
+    <li style="border-bottom: none;">
+        <a a class="d-flex justify-content-center"routerLink="/teachers" (click)="linkClick.emit()">Find a teacher</a>
+    </li>
+</ul>
+
+
+<header class="nav-banner" *ngIf="isCurrentUserTeacher">
+    Teacher panel
+</header>
+<ul *ngIf="isCurrentUserTeacher">
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/my-courses" (click)="linkClick.emit()">My courses</a>
+    </li>
+    <li style="border-bottom: none;">
+        <a a class="d-flex justify-content-center"routerLink="/new-course" (click)="linkClick.emit()">Create a new course</a>
+    </li>
+</ul>
+
+
+<button class="nav-banner">
+    Your account
+</button>
+<ul *ngIf="!userService.GetCurrentUser()">
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/login" (click)="linkClick.emit()">Log in</a>
+    </li>
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/register" (click)="linkClick.emit()">register</a>
+    </li>
+</ul>
+
+<ul *ngIf="userService.GetCurrentUser()">
+    <li *ngIf="!isCurrentUserAdmin">
+        <a a class="d-flex justify-content-center"routerLink="/user/{{ userService.GetCurrentUser().id }}" (click)="linkClick.emit()">My profile</a>
+    </li>
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/messages" (click)="linkClick.emit()">The news</a>
+    </li>
+    <li *ngIf="!isCurrentUserAdmin">
+        <a a class="d-flex justify-content-center"routerLink="/user/settings" (click)="linkClick.emit()">Account settings</a>
+    </li>
+    <li>
+        <a a class="d-flex justify-content-center"routerLink="/logout" (click)="linkClick.emit()">Log out</a>
+    </li>
+</ul>

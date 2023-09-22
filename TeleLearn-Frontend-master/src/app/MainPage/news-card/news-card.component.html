@@ -1,0 +1,15 @@
+<section class="card">
+    <div class="card-title">
+        <a class="title" routerLink="news/{{ news.id }}">
+            {{ news.title }}
+        </a>
+    </div>
+    <div class="card-subtitle">
+        {{ news.author.name }} {{ news.author.surname }} 
+        ({{ news.publicationDate | date:'dd.MM.yyyy HH:mm' }})
+    </div>
+    <article class="card-text">
+        {{ GetBrief() }}
+    </article>
+    <a *ngIf="news.htmlContent" class="card-link" routerLink="news/{{ news.id }}">Read more...</a>
+</section>

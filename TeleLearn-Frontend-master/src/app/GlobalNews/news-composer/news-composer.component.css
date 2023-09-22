@@ -1,0 +1,14 @@
+.content-container {
+    padding: 10px 10px;
+    border: solid 1px rgb(230, 230, 230);
+    width: 100%;
+    display: flex; /*added*/
+    flex-direction: column; 
+}
+
+::ng-deep .ql-editor {
+    height: 35em;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+}
+

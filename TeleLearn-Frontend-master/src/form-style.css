@@ -1,0 +1,31 @@
+.form-container {
+    max-width: 800px;
+    padding: 20px;
+    border: solid 1px lightgray;
+}
+
+.header {
+    font-size: 18pt;
+}
+
+.login-form {
+    margin: 0 50px;
+}
+
+label:not([class=form-check-label]) {
+    font-weight: bold;
+}
+
+.invalid  {
+    border-left: 5px solid #a94442; /* red */
+}
+
+.sub-btn {
+    margin-top: 1em;
+}
+
+@media only screen and (max-width: 1000px) {
+    .login-form {
+        margin: 0;
+    }
+}

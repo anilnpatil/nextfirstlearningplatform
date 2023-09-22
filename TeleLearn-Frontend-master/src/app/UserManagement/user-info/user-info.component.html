@@ -1,0 +1,30 @@
+<section class="card">
+    <app-error-bar *ngIf="error" [errorMessage]="errorMessage"></app-error-bar>
+    <div class="card-title" *ngIf="user">
+        <span *ngIf="teacher">{{ teacher.title }}</span>
+        {{user.name }}
+        {{ user.surname }}
+    </div>
+    <div class="card-subtitle" *ngIf="student">
+        Student<span *ngIf="student.unit">
+            w
+            {{ student.unit }}</span>
+    </div>
+    <div class="card-subtitle" *ngIf="teacher">
+        Teacher<span *ngIf="teacher.unit">
+            w
+            {{ teacher.unit }}</span>
+    </div>
+    <div class="container"  *ngIf="user">
+        <div class="row d-flex justify-content-end">
+            <button class="btn btn-primary d-flex align-items-center" (click)="OnMessageClick(user.id)">
+                <i class="material-icons md-18">message</i>Write a message</button>
+        </div>
+    </div>
+    <a class="h5" *ngIf="teacher">Conducted courses:</a>
+    <div class="container" *ngIf="teacher">
+        <div class="courses justify-content-center">
+            <app-courses-brief [courseBriefs]="coursesBriefs" [showOwner]="false"></app-courses-brief>
+        </div>
+    </div>
+</section>

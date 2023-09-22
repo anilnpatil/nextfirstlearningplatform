@@ -1,0 +1,19 @@
+<section class="card shadow-sm" *ngIf="course">
+    <div class="card-title">
+        Information about the presenter
+    </div>
+    <div class="d-flex align-items-center">
+        <i class="material-icons">person</i>
+        <a routerLink="/user/{{ course.owner.id }}">
+            {{ course.owner.title }} {{ course.owner.name }} {{ course.owner.surname }}
+        </a>
+    </div>
+</section>
+
+<section class="card shadow-sm" *ngIf="course && course.welcomePageHtmlContent">
+    <div class="card-title">
+        About the course
+    </div>
+    <div class="card-text" [innerHTML]="course.welcomePageHtmlContent | safeHtml">
+    </div>
+</section>
