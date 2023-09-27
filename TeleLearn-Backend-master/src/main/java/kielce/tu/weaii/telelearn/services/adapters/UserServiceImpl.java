@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void verifyPermissionToUser(Long userId) {
         if (!isCurrentUserOrAdmin(userId)) {
-            throw new AuthorizationException("użytkownik", userServiceDetails.getCurrentUser().getId(), userId);
+            throw new AuthorizationException("user", userServiceDetails.getCurrentUser().getId(), userId);
         }
     }
 }

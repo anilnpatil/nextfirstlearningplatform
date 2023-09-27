@@ -12,13 +12,13 @@ import java.util.List;
 @Valid
 @Data
 public class PostRequest {
-    @NotNull(message = "Nie podano id kursu.")
+    @NotNull(message = "No course ID provided.")
     private Long courseId;
-    @NotBlank(message = "Post musi mieć zawartość")
+    @NotBlank(message = "The post must have content")
     private String content;
-    @NotNull(message = "Nie określono widoczności posta.")
+    @NotNull(message = "Post visibility not specified.")
     private PostVisibility postVisibility;
-    @NotNull(message = "Nie określono możliwości komentowania.")
+    @NotNull(message = "No comments allowed.")
     private boolean commentingAllowed;
     private List<Long> attachmentIdsToDelete = new ArrayList<>();
 }

@@ -2,7 +2,7 @@ package kielce.tu.weaii.telelearn.models;
 
 public enum UserRole {
     ADMIN("ROLE_ADMIN", "administrator"),
-    TEACHER("ROLE_TEACHER", "nauczyciel"),
+    TEACHER("ROLE_TEACHER", "teacher"),
     STUDENT("ROLE_STUDENT", "student");
 
     private String string;

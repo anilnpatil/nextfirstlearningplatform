@@ -20,7 +20,7 @@ public class RecordLearningRequest {
     private LocalTime startTime;
 
     @Valid
-    @NotNull(message = "Należy określić czas.")
+    @NotNull(message = "You must specify the time.")
     private TimeSpanRequest duration;
 
     @JsonCreator
@@ -28,7 +28,7 @@ public class RecordLearningRequest {
     public RecordLearningRequest(@JsonProperty(value = "startTime", required = true) String startTime,
                                  @JsonProperty(value = "duration", required = true) TimeSpanRequest duration) {
         if (isStringNullOrEmpty(startTime)) {
-            throw new IllegalArgumentException("Należy podać czas rozpoczęcia.");
+            throw new IllegalArgumentException("You must enter a start time.");
         }
         this.startTime = LocalTime.parse(startTime, TIME_FORMATTER);
         this.duration = duration;

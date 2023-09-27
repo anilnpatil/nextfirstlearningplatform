@@ -12,11 +12,11 @@ import javax.validation.constraints.NotNull;
 @Getter
 @EqualsAndHashCode
 public class SendMessageRequest {
-    @NotNull(message = "Wiadomość musi posiadać nadawcę.")
+    @NotNull(message = "The message must have a sender.")
     private Long senderId;
-    @NotNull(message = "Wiadomość musi posiadać odbiorcę.")
+    @NotNull(message = "The message must have a recipient.")
     private Long receiverId;
-    @NotBlank(message = "Wiadomość nie może być pusta.")
+    @NotBlank(message = "The message cannot be empty.")
     private String content;
 
     public SendMessageRequest(@JsonProperty(value = "senderId") Long senderId,

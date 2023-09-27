@@ -13,11 +13,11 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @EqualsAndHashCode
 public class LearningTimeRequest {
-    @NotNull(message = "Należy określić ucznia.")
+    @NotNull(message = "You must specify the student.")
     private Long studentId;
-    @NotNull(message = "Należy określić datę.")
+    @NotNull(message = "You must specify a date.")
     private LocalDate date;
-    @NotNull(message = "Należy określić czas.")
+    @NotNull(message = "You must specify the time.")
     @Valid
     private TimeSpanRequest time;
 

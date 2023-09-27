@@ -57,7 +57,7 @@ public class TaskServiceImpl implements TaskService {
                 (currentUser.getUserRole().equals(UserRole.STUDENT) &&
                         task.getCourse().getStudents().stream()
                                 .noneMatch(entry -> entry.getStudent().getId().equals(currentUser.getId())))) {
-            throw new AuthorizationException("zadanie", currentUser.getId(), id);
+            throw new AuthorizationException("task", currentUser.getId(), id);
         }
         return task;
     }
@@ -106,7 +106,7 @@ public class TaskServiceImpl implements TaskService {
     // @Transactional
     public Task updateProgress(Long id, TaskProgressPatchRequest request) {
         if (!request.getStudentId().equals(userServiceDetails.getCurrentUser().getId())) {
-            throw new AuthorizationException("Aktualizacja postępu zadania.", userServiceDetails.getCurrentUser().getId(), request.getStudentId());
+            throw new AuthorizationException("Task progress update.", userServiceDetails.getCurrentUser().getId(), request.getStudentId());
         }
         Task task = getById(id);
         TaskStudent taskStudent = task.getStudentRecordOrNull(request.getStudentId());
@@ -128,7 +128,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task updateTaskRepeat(Long id, TaskRepeatPatchRequest request) {
         if (!request.getStudentId().equals(userServiceDetails.getCurrentUser().getId())) {
-            throw new AuthorizationException("Ustawanie zadania do powtórzenia.", userServiceDetails.getCurrentUser().getId(), request.getStudentId());
+            throw new AuthorizationException("Setting a task to repeat.", userServiceDetails.getCurrentUser().getId(), request.getStudentId());
         }
         Task task = getById(id);
         TaskStudent taskStudent = task.getStudentRecordOrNull(request.getStudentId());
@@ -142,7 +142,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskStudentSummary getStudentByTasksFromCurse(Long studentId, LocalDate today) {
         if (!userService.isCurrentUserOrAdmin(studentId)) {
-            throw new AuthorizationException("lista zadań użytkownika", userServiceDetails.getCurrentUser().getId(), studentId);
+            throw new AuthorizationException("user task list", userServiceDetails.getCurrentUser().getId(), studentId);
         }
         TaskStudentSummary taskStudentSummary = new TaskStudentSummary();
         List<Task> tasks = taskRepository.getStudentByTasksFromCurse(studentId);

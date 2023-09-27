@@ -73,7 +73,7 @@ public class PostServiceImpl implements PostService {
         User currentUser = userServiceDetails.getCurrentUser();
         if (currentUser.getUserRole().equals(UserRole.STUDENT) &&
                 !course.isStudentsAllowedToPost()) {
-            throw new AuthorizationException("dodawanie postu", currentUser.getId(), course.getId());
+            throw new AuthorizationException("adding a post", currentUser.getId(), course.getId());
         }
         return postRepository.save(preparePost(request, attachments, course));
     }
@@ -116,7 +116,7 @@ public class PostServiceImpl implements PostService {
         User currentUser = userServiceDetails.getCurrentUser();
         Comment comment = commentJpaRepository.findById(id).orElseThrow(() -> new CommentNotFound(id));
         if (userNotPermittedToDeleteComment(currentUser, comment)) {
-            throw new AuthorizationException("usuwanie komentarza", currentUser.getId(), id);
+            throw new AuthorizationException("deleting a comment", currentUser.getId(), id);
         }
         commentJpaRepository.delete(comment);
     }
@@ -127,7 +127,7 @@ public class PostServiceImpl implements PostService {
         Post post = getById(id);
         User currentUser = userServiceDetails.getCurrentUser();
         if (isUserNotPermittedToDelete(post, currentUser)) {
-            throw new AuthorizationException("usuwanie posta", currentUser.getId(), post.getId());
+            throw new AuthorizationException("deleting a post", currentUser.getId(), post.getId());
         }
         postRepository.delete(post);
     }
@@ -138,10 +138,10 @@ public class PostServiceImpl implements PostService {
             return;
         }
         if (isCurrentUserNotCurseOwner(post, currentUser)) {
-            throw new AuthorizationException("wyświetlanie postów kursu", currentUser.getId(), post.getCourse().getId());
+            throw new AuthorizationException("displaying course posts", currentUser.getId(), post.getCourse().getId());
         }
         if (isCurrentStudentInNotAllowedToSeePost(post, currentUser)) {
-            throw new AuthorizationException("wyświetlanie postów kursu", currentUser.getId(), post.getCourse().getId());
+            throw new AuthorizationException("displaying course posts", currentUser.getId(), post.getCourse().getId());
         }
     }
 
@@ -196,7 +196,7 @@ public class PostServiceImpl implements PostService {
         }
         User currentUser = userServiceDetails.getCurrentUser();
         if (!post.getAuthor().getId().equals(currentUser.getId())) {
-            throw new AuthorizationException("edycja posta", currentUser.getId(), post.getId());
+            throw new AuthorizationException("post editing", currentUser.getId(), post.getId());
         }
     }
 

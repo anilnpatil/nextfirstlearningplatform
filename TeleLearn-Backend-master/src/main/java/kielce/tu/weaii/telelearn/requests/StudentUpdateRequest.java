@@ -14,12 +14,12 @@ import java.time.Duration;
 @Getter
 @EqualsAndHashCode
 public class StudentUpdateRequest {
-    @NotBlank(message = "Email nie może być pusty")
-    @Email(message = "Podaj poprawny email")
+    @NotBlank(message = "Email cannot be empty")
+    @Email(message = "Please enter a valid email address")
     private String email;
-    @NotBlank(message = "Imię nie może być puste")
+    @NotBlank(message = "The first name cannot be empty")
     private String name;
-    @NotBlank(message = "Nazwisko nie może być puste")
+    @NotBlank(message = "The last name cannot be empty")
     private String surname;
     private String unit;
     @JsonIgnore
@@ -32,10 +32,10 @@ public class StudentUpdateRequest {
                                 @JsonProperty(value = "hours", required = true) long hours,
                                 @JsonProperty(value = "minutes", required = true) long minutes) {
         if (hours < 0 || hours > 23) {
-            throw new IllegalArgumentException("Nieprawidłowa liczba godzin");
+            throw new IllegalArgumentException("Incorrect number of hours");
         }
         if (minutes < 0 || minutes >= 60) {
-            throw new IllegalArgumentException("Nieprawidłowa liczba minut");
+            throw new IllegalArgumentException("Incorrect number of minutes");
         }
         this.email = email;
         this.name = name;

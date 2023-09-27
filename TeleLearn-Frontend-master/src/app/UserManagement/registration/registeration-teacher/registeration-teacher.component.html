@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
             <label>Password(*)</label>
-            <input type="password" placeholder="your password" formControlName="password" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.password.errors }"/>
+            <input type="password" placeholder="Enter password" formControlName="password" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.password.errors }"/>
             <div *ngIf="submitted && ctls.password.errors" class="text-danger">
                 <div *ngIf="ctls.password.errors.required">Password is required</div>
                 <div *ngIf="ctls.password.errors.minlength">The password must have at least {{ PASSWORD_MIN_LENGHT }} characters</div>

@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @EqualsAndHashCode
 public class PostCommentRequest {
-    @NotBlank(message = "Komentarz musi zawierać treść.")
+    @NotBlank(message = "The comment must contain content.")
     private String content;
 
     public PostCommentRequest(@JsonProperty(value = "content", required = true) String content) {

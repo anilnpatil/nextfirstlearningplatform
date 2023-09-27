@@ -13,16 +13,16 @@ import javax.validation.constraints.NotNull;
 @Getter
 @EqualsAndHashCode
 public class StudentRegisterRequest {
-    @NotBlank(message = "Login nie może być pusty")
+    @NotBlank(message = "Login cannot be empty")
     private String username;
-    @NotNull(message = "Hasło nie może być puste")
+    @NotNull(message = "The password cannot be empty")
     private char[] password;
-    @NotBlank(message = "Email nie może być pusty")
-    @Email(message = "Podaj poprawny email")
+    @NotBlank(message = "Email cannot be empty")
+    @Email(message = "Please enter a valid email address")
     private String email;
-    @NotBlank(message = "Imię nie może być puste")
+    @NotBlank(message = "The first name cannot be empty")
     private String name;
-    @NotBlank(message = "Nazwisko nie może być puste")
+    @NotBlank(message = "The last name cannot be empty")
     private String surname;
     private String unit;
 

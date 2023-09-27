@@ -35,10 +35,10 @@ public class ScheduleTaskRequest {
                                @JsonProperty(value = "hours", required = true) long hours,
                                @JsonProperty(value = "minutes", required = true) long minutes) {
         if (hours < 0 || hours > 23) {
-            throw new IllegalArgumentException("Nieprawidłowa liczba godzin");
+            throw new IllegalArgumentException("Incorrect number of hours");
         }
         if (minutes < 0 || minutes >= 60) {
-            throw new IllegalArgumentException("Nieprawidłowa liczba minut");
+            throw new IllegalArgumentException("Incorrect number of minutes");
         }
         this.taskId = taskId;
         this.studentId = studentId;

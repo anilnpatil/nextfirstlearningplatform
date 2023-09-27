@@ -13,12 +13,12 @@ import javax.validation.constraints.NotNull;
 @Getter
 @EqualsAndHashCode
 public class TaskProgressPatchRequest {
-    @NotNull(message = "Należy podać id ucznia.")
+    @NotNull(message = "You must provide your student ID.")
     private Long studentId;
 
-    @NotNull(message = "Należy podać procent ukończenia.")
-    @Min(value = 0, message = "Postęp nie może być mniejszy niż 0.")
-    @Max(value = 100, message = "Postęp nie może być większy niż 100.")
+    @NotNull(message = "You must enter the percentage of completion.")
+    @Min(value = 0, message = "Progress cannot be less than 0.")
+    @Max(value = 100, message = "Progress cannot be greater than 100.")
     private Integer progress;
 
     public TaskProgressPatchRequest(@JsonProperty(value = "studentId", required = true) Long studentId,

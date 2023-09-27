@@ -27,13 +27,13 @@ import java.util.stream.Collectors;
 public class CustomExceptionHandler extends DefaultHandlerExceptionResolver {
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ErrorResponse> badCredentialsExceptionHandler(BadCredentialsException ex) {
-        ErrorResponse errors = new ErrorResponse(LocalDateTime.now(), "Nieporawne dane logowania");
+        ErrorResponse errors = new ErrorResponse(LocalDateTime.now(), "Incorrect login details");
         return new ResponseEntity<>(errors, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(DisabledException.class)
     public ResponseEntity<ErrorResponse> badCredentialsExceptionHandler(DisabledException ex) {
-        ErrorResponse errors = new ErrorResponse(LocalDateTime.now(), "Konto zostało zablokowane");
+        ErrorResponse errors = new ErrorResponse(LocalDateTime.now(), "The account has been blocked");
         return new ResponseEntity<>(errors, HttpStatus.UNAUTHORIZED);
     }
 
@@ -44,7 +44,7 @@ public class CustomExceptionHandler extends DefaultHandlerExceptionResolver {
         if (cause instanceof IllegalArgumentException) {
             errors = new ErrorResponse(LocalDateTime.now(), cause.getMessage());
         } else {
-            errors = new ErrorResponse(LocalDateTime.now(), "Niepoprawne dane wejściowe");
+            errors = new ErrorResponse(LocalDateTime.now(), "Invalid input");
             Writer buffer = new StringWriter();
             PrintWriter pw = new PrintWriter(buffer);
             ex.printStackTrace(pw);

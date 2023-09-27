@@ -41,7 +41,7 @@ public class StudentStatsView {
 
     private static void converMap(Set<Map<String, Object>> learningTimeForCourseSevenDays, Map.Entry<Course, Duration> entry) {
         Map<String, Object> statMap = new HashMap<>();
-        statMap.put("course", entry.getKey() != null ? entry.getKey().getName() : "usunięte");
+        statMap.put("course", entry.getKey() != null ? entry.getKey().getName() : "deleted");
         statMap.put("learningTime", TimeVew.form(entry.getValue()));
         learningTimeForCourseSevenDays.add(statMap);
     }

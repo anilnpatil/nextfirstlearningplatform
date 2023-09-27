@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @EqualsAndHashCode
 public class LoginRequest {
-    @NotBlank(message = "Należy podać login")
+    @NotBlank(message = "You must provide a login")
     private String userName;
     private char[] password;
 

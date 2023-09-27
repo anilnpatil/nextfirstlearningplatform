@@ -51,7 +51,7 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public Student update(Long id, StudentUpdateRequest request) {
         if (!userService.isCurrentUserOrAdmin(id)) {
-            throw new AuthorizationException("użytkownik", null, id);
+            throw new AuthorizationException("user", null, id);
         }
         Student student = getById(id);
         if (!student.getEmail().equals(request.getEmail())) {
@@ -69,7 +69,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Course> getCourses(Long id) {
         if (!userService.isCurrentUserOrAdmin(id)) {
-            throw new AuthorizationException("lista kursów użytkownnika", id, userServiceDetails.getCurrentUser().getId());
+            throw new AuthorizationException("list of user courses", id, userServiceDetails.getCurrentUser().getId());
         }
         return getById(id).getCourses().stream().
                 filter(CourseStudent::isAccepted)

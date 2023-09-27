@@ -49,7 +49,7 @@ public class TeacherServiceImpl implements TeacherService {
     // @Transactional
     public Teacher update(Long id, TeacherUpdateRequest request) {
         if (!userService.isCurrentUserOrAdmin(id)) {
-            throw new AuthorizationException("użytkownik", null, id);
+            throw new AuthorizationException("user", null, id);
         }
         Teacher teacher = getById(id);
         if (!teacher.getEmail().equals(request.getEmail())) {
