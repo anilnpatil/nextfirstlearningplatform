@@ -11,10 +11,10 @@ import javax.validation.constraints.NotNull;
 @Getter
 @EqualsAndHashCode
 public class TaskRepeatPatchRequest {
-    @NotNull(message = "Należy podać id ucznia.")
+    @NotNull(message = "You must provide your student ID.")
     private Long studentId;
 
-    @NotNull(message = "Należy określić czy zadanie jest do powtórki.")
+    @NotNull(message = "Determine whether the task needs to be repeated.")
     private Boolean toRepeat;
 
     public TaskRepeatPatchRequest(@JsonProperty(value = "studentId", required = true) Long studentId,

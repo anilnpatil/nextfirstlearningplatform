@@ -15,23 +15,23 @@ import java.util.List;
 @Data
 @Valid
 public class TaskRequest {
-    @NotBlank(message = "Nie podano nazwy zadania.")
+    @NotBlank(message = "No task name provided.")
     private String name;
 
     private String description;
 
-    @Min(value = 0, message = "Wartość godzin nie może być ujemna.")
+    @Min(value = 0, message = "The value of hours cannot be negative.")
     private int learningTimeHours;
 
-    @Min(value = 0, message = "Wartość minut nie może być ujemna.")
-    @Max(value = 60, message = "Wartość minut nie może być większa niż 60.")
+    @Min(value = 0, message = "The minutes value cannot be negative.")
+    @Max(value = 60, message = "The minutes value cannot be greater than 60.")
     private int learningTimeMinutes;
 
-    @NotNull(message = "Nie podano daty zakończenia zadania.")
+    @NotNull(message = "No end date was given for the task.")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
 
-    @NotNull(message = "Nie podano ścieżki.")
+    @NotNull(message = "No path provided.")
     private Long courseId;
 
     private List<Long> attachmentIdsToDelete = new ArrayList<>();

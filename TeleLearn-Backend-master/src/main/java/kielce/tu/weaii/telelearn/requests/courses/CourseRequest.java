@@ -11,21 +11,21 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class CourseRequest {
 
-    @NotNull(message = "Nie podano właściciela kursu")
+    @NotNull(message = "The owner of the course was not provided")
     private Long ownerId;
 
-    @NotBlank(message = "Nazwa nie może być pusta.")
+    @NotBlank(message = "The name field cannot be empty.")
     private String name;
 
     private String welcomePageHtmlContent;
 
-    @NotNull(message = "Musi być określone czy kurs jest publiczny.")
+    @NotNull(message = "It must be specified whether the course is public.")
     private boolean publicCourse;
 
-    @NotNull(message = "Musi być określone czy użytkownicy są akceptowany automatycznie.")
+    @NotNull(message = "It must be specified whether users are accepted automatically.")
     private boolean autoAccept;
 
-    @NotNull(message = "Musi być określone czy uczniowe mogą dodawać posty.")
+    @NotNull(message = "It must be specified whether students can add posts.")
     private boolean studentsAllowedToPost;
 
     public CourseRequest(@JsonProperty(value = "ownerId", required = true) Long ownerId,

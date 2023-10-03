@@ -13,13 +13,13 @@ import java.time.LocalDateTime;
 @Getter
 @EqualsAndHashCode
 public class GlobalNewsRequest {
-    @NotBlank(message = "Artykuł musi mieć tytuł")
+    @NotBlank(message = "The article must have a title")
     private String title;
-    @NotNull(message = "Artykuł musi mieć autora")
+    @NotNull(message = "The article must have an author")
     private Long authorId;
     private String brief;
     private String htmlContent;
-    @NotNull(message = "Nie podano daty publikacji")
+    @NotNull(message = "No publication date given")
     private LocalDateTime publicationDate;
 
     public GlobalNewsRequest(@JsonProperty(value = "title", required = true) String title,

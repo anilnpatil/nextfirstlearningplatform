@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @EqualsAndHashCode
 public class CourseStudentRequest {
-    @NotNull(message = "Należy podać id użytkownika")
+    @NotNull(message = "User ID must be provided")
     private Long studentId;
 
     public CourseStudentRequest(@JsonProperty(value = "userId", required = true) Long studentId) {

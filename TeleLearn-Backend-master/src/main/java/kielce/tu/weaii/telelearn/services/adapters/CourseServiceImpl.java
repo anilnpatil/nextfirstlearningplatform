@@ -45,7 +45,7 @@ public class CourseServiceImpl implements CourseService {
                         .stream()
                         .filter(CourseStudent::isAccepted)
                         .noneMatch(entry -> entry.getStudent().getId().equals(currentUser.getId()))) {
-            throw new AuthorizationException("kurs", currentUser.getId(), id);
+            throw new AuthorizationException("course", currentUser.getId(), id);
         }
         return course;
     }
@@ -127,7 +127,7 @@ public class CourseServiceImpl implements CourseService {
 
     private void checkAuthorization(CourseRequest request) {
         if (!userService.isCurrentUserOrAdmin(request.getOwnerId())) {
-            throw new AuthorizationException("dodawanie/edycja kursu",
+            throw new AuthorizationException("adding/editing a course",
                     userServiceDetails.getCurrentUser().getId(),
                     request.getOwnerId());
         }
@@ -136,14 +136,14 @@ public class CourseServiceImpl implements CourseService {
     private void checkCourseAuthorization(Long courseId, Long ownerId) {
         User currentUser = userServiceDetails.getCurrentUser();
         if (!currentUser.getUserRole().equals(UserRole.ADMIN) && !currentUser.getId().equals(ownerId)) {
-            throw new AuthorizationException("kurs", currentUser.getId(), courseId);
+            throw new AuthorizationException("course", currentUser.getId(), courseId);
         }
     }
 
     private void checkUserAuthorization(Long studentId) {
         User currentUser = userServiceDetails.getCurrentUser();
         if (!userService.isCurrentUserOrAdmin(studentId)) {
-            throw new AuthorizationException("zapisywanie użytkownika", currentUser.getId(), studentId);
+            throw new AuthorizationException("saving user", currentUser.getId(), studentId);
         }
     }
 
@@ -169,7 +169,7 @@ public class CourseServiceImpl implements CourseService {
         if (!currentUser.getUserRole().equals(UserRole.ADMIN) &&
                 !currentUser.getId().equals(course.getOwner().getId()) &&
                 !currentUser.getId().equals(studentId)) {
-            throw new AuthorizationException("usuwanie użytkownika z kursu", currentUser.getId(), courseId);
+            throw new AuthorizationException("removing a user from the course", currentUser.getId(), courseId);
         }
     }
 }

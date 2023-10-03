@@ -9,14 +9,14 @@
     <div class="login-form">
         <form [formGroup]="loginForm" (ngSubmit)="Submit()">
             <div class="form-group">
-                <label>Login or email</label>
-                <input type="text" placeholder="Your login or email address" formControlName="login" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.login.errors }"/>
-                <div class="text-danger" *ngIf="submitted && ctls.login.errors && ctls.login.errors.required">Enter your login</div>
+                <label>User Name</label>
+                <input type="text" placeholder="Your User Name or E-mail address" formControlName="login" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.login.errors }"/>
+                <div class="text-danger" *ngIf="submitted && ctls.login.errors && ctls.login.errors.required">Enter User Name or E-mail address</div>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" placeholder="your password" formControlName="password" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.password.errors }"/>
-                <div class="text-danger" *ngIf="submitted && ctls.password.errors && ctls.password.errors.required">enter the password</div>
+                <input type="password" placeholder="Enter password" formControlName="password" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.password.errors }"/>
+                <div class="text-danger" *ngIf="submitted && ctls.password.errors && ctls.password.errors.required">Enter the password</div>
             </div>
             <div class="form-group d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary">Log in</button>

@@ -47,7 +47,7 @@ public class LearningTimeServiceImpl implements LearningTimeService {
 
     private void checkAuthorization(Long studentId) {
         if (!userRepository.getCurrentUser().getId().equals(studentId)) {
-            throw new AuthorizationException("Planowany czas ucznia", userRepository.getCurrentUser().getId(), studentId);
+            throw new AuthorizationException("Student's planned time", userRepository.getCurrentUser().getId(), studentId);
         }
     }
 }

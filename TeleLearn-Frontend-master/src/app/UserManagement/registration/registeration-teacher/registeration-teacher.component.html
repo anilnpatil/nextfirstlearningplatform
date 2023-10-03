@@ -2,27 +2,27 @@
 <div class="login-form">
     <form [formGroup]="registerationForm" (ngSubmit)="Submit()">
         <div class="form-group">
-            <label>Login(*)</label>
-            <input type="text" placeholder="Your login" formControlName="login" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.login.errors }"/>
-            <div class="text-danger" *ngIf="submitted && ctls.login.errors && ctls.login.errors.required">Enter your login</div>
+            <label>User Name(*)</label>
+            <input type="text" placeholder="Your User Name" formControlName="login" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.login.errors }"/>
+            <div class="text-danger" *ngIf="submitted && ctls.login.errors && ctls.login.errors.required">Enter your User Name</div>
         </div>
         <div class="form-group">
             <label>Password(*)</label>
-            <input type="password" placeholder="your password" formControlName="password" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.password.errors }"/>
+            <input type="password" placeholder="Enter password" formControlName="password" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.password.errors }"/>
             <div *ngIf="submitted && ctls.password.errors" class="text-danger">
                 <div *ngIf="ctls.password.errors.required">Password is required</div>
                 <div *ngIf="ctls.password.errors.minlength">The password must have at least {{ PASSWORD_MIN_LENGHT }} characters</div>
             </div>
         </div>
         <div class="form-group">
-            <label>Name(*)</label>
-            <input type="text" placeholder="Your name" formControlName="name" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.name.errors }"/>
-            <div class="text-danger" *ngIf="submitted && ctls.name.errors && ctls.name.errors.required">Give your name</div>
+            <label>First Name(*)</label>
+            <input type="text" placeholder="Your firstname" formControlName="name" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.name.errors }"/>
+            <div class="text-danger" *ngIf="submitted && ctls.name.errors && ctls.name.errors.required">Give your firstname</div>
         </div>
         <div class="form-group">
             <label>Last name(*)</label>
-            <input type="text" placeholder="your last name" formControlName="surname" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.surname.errors }"/>
-            <div class="text-danger" *ngIf="submitted && ctls.surname.errors && ctls.surname.errors.required">Please provide your name</div>
+            <input type="text" placeholder="Your lastname" formControlName="surname" class="form-control" [ngClass]="{ 'invalid': submitted && ctls.surname.errors }"/>
+            <div class="text-danger" *ngIf="submitted && ctls.surname.errors && ctls.surname.errors.required">Please provide your lastname</div>
         </div>
         <div class="form-group">
             <label>E-mail(*)</label>

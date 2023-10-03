@@ -41,7 +41,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<ConversationInfo> getConversations(Long userId) {
         if (!userDetailsService.getCurrentUser().getId().equals(userId)) {
-            throw new AuthorizationException("konwersacje",
+            throw new AuthorizationException("conversations",
                     userDetailsService.getCurrentUser().getId(),
                     userId);
         }
@@ -53,7 +53,7 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> getConversation(Long participant1Id, Long participant2Id) {
         User currentUser = userDetailsService.getCurrentUser();
         if (!currentUser.getId().equals(participant1Id) && !currentUser.getId().equals(participant2Id)) {
-            throw new AuthorizationException("konwersacja", participant1Id, participant2Id);
+            throw new AuthorizationException("conversation", participant1Id, participant2Id);
         }
         messageRepository.setConversationAsRead(participant1Id, participant2Id);
         return messageRepository.getConversation(participant1Id, participant2Id);

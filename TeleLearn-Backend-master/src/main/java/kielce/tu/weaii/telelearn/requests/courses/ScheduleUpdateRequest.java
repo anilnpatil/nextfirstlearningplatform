@@ -18,7 +18,7 @@ import static kielce.tu.weaii.telelearn.utilities.Utils.isStringNullOrEmpty;
 @EqualsAndHashCode
 public class ScheduleUpdateRequest {
     @Valid
-    @NotNull(message = "Należy określić czas.")
+    @NotNull(message = "You must specify the time.")
     private Duration plannedTime;
 
     private LocalTime scheduleTime;

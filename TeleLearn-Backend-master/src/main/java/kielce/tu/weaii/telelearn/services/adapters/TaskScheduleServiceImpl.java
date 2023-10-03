@@ -46,7 +46,7 @@ public class TaskScheduleServiceImpl implements TaskScheduleService {
     public TaskScheduleRecord getById(Long id) {
         TaskScheduleRecord record = repository.getById(id).orElseThrow(ScheduleRecordNotFound::new);
         if (!record.getStudent().getId().equals(userServiceDetails.getCurrentUser().getId())) {
-            throw new AuthorizationException("Wpis planu użytkownika", userServiceDetails.getCurrentUser().getId(), id);
+            throw new AuthorizationException("User plan entry", userServiceDetails.getCurrentUser().getId(), id);
         }
         return record;
     }
@@ -54,7 +54,7 @@ public class TaskScheduleServiceImpl implements TaskScheduleService {
     @Override
     public List<TaskScheduleRecord> getListForStudent(Long studentId) {
         if (!studentId.equals(userServiceDetails.getCurrentUser().getId())) {
-            throw new AuthorizationException("Plan użytkownika", userServiceDetails.getCurrentUser().getId(), studentId);
+            throw new AuthorizationException("User plan", userServiceDetails.getCurrentUser().getId(), studentId);
         }
         return repository.getAll().stream().filter(entry -> entry.getStudent().getId().equals(studentId)).collect(Collectors.toList());
     }

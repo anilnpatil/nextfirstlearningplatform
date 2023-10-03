@@ -59,7 +59,7 @@ public class StudentStatsServiceImpl implements StudentStatsService {
     @Override
     public StudentStats getStudentStat(Long studentId, LocalDate today) {
         if (!userServiceDetails.getCurrentUser().getId().equals(studentId)) {
-            throw new AuthorizationException("Statystyki ucznia.", userServiceDetails.getCurrentUser().getId(), studentId);
+            throw new AuthorizationException("Student statistics.", userServiceDetails.getCurrentUser().getId(), studentId);
         }
         return getStudentStats(studentId, today);
     }

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode
 public class UserPasswordPatchRequest {
     private char[] oldPassword;
-    @NotNull(message = "Nowe nie może być puste")
+    @NotNull(message = "The new password cannot be empty")
     private char[] newPassword;
 
     public UserPasswordPatchRequest(@JsonProperty(value = "oldPassword") char[] oldPassword,
